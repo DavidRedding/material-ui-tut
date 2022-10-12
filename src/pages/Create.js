@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-export default function Create() {
-  return (
-    <div>
-      Create page
-    </div>
-  )
-}
+const Create = () => {
+  return <div>Create page</div>;
+};
+
+export default Create;

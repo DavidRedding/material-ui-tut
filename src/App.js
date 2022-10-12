@@ -1,8 +1,7 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Notes from './pages/Notes'
-import Create from './pages/Create'
-
-function App() {
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Notes from './pages/Notes';
+import Create from './pages/Create';
+const App = () => {
   return (
     <Router>
       <Switch>
@@ -15,6 +14,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;
