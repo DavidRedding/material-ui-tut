@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { Typography, Button, Container, makeStyles, TextField } from '@material-ui/core/';
+import {
+  Typography,
+  Button,
+  Container,
+  makeStyles,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormLabel,
+  FormControlLabel,
+} from '@material-ui/core/';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import SendIcon from '@material-ui/icons/Send';
 
@@ -13,15 +24,18 @@ const useStyles = makeStyles({
 
 const Create = () => {
   const { field } = useStyles();
+
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
   const [titleHelperText, setTitleHelperText] = useState('');
   const [detailsHelperText, setDetailsHelperText] = useState('');
+  const [category, setCategory] = useState('work');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     setTitleError(false);
     setDetailsError(false);
     setTitleHelperText('');
@@ -37,7 +51,7 @@ const Create = () => {
       setDetailsHelperText('Please add the details');
     }
 
-    if (title && details) console.log(title, details);
+    if (title && details) console.log(title, details, category);
   };
 
   return (
@@ -74,6 +88,16 @@ const Create = () => {
           error={detailsError}
           helperText={detailsHelperText}
         />
+
+        <FormControl className={field}>
+          <FormLabel color="secondary">Note Category</FormLabel>
+          <RadioGroup onChange={(e) => setCategory(e.target.value)} value={category}>
+            <FormControlLabel value="work" control={<Radio />} label="Work" />
+            <FormControlLabel value="to-do" control={<Radio />} label="To-Do" />
+            <FormControlLabel value="finance" control={<Radio />} label="Finance" />
+            <FormControlLabel value="reminder" control={<Radio />} label="Reminder" />
+          </RadioGroup>
+        </FormControl>
 
         <Button
           type="submit"
