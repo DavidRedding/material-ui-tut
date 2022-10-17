@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core/';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import SendIcon from '@material-ui/icons/Send';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   field: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
 
 const Create = () => {
   const { field } = useStyles();
-
+  let history = useHistory();
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const [titleError, setTitleError] = useState(false);
@@ -33,7 +34,7 @@ const Create = () => {
   const [detailsHelperText, setDetailsHelperText] = useState('');
   const [category, setCategory] = useState('work');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setTitleError(false);
@@ -51,7 +52,13 @@ const Create = () => {
       setDetailsHelperText('Please add the details');
     }
 
-    if (title && details) console.log(title, details, category);
+    if (title && details) {
+      fetch('http://localhost:8000/notes', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({ title, details, category }),
+      }).then(() => history.push('/'));
+    }
   };
 
   return (
