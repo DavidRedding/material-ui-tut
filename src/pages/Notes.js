@@ -1,3 +1,4 @@
+import { Container, Grid, Paper } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 
 const Notes = () => {
@@ -5,23 +6,27 @@ const Notes = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(`BEGIN`);
-
       const res = await fetch('http://localhost:3000/notes');
-      if (!res.ok || res.status != 200) {
-        throw new Error(`NOOOOOO`);
-      }
-      console.log(res);
+      if (!res.ok || res.status != 200) throw new Error(`NOOOOOO`);
 
       const notes = await res.json();
-      console.log(notes);
-
       setNotes(notes);
     };
     fetchData().catch((err) => console.log(err));
   }, []);
 
-  return <div>{notes && notes.map((note) => <p key={note.id}>{note.title}</p>)}</div>;
+  return (
+    <Container>
+      <Grid container>
+        {notes &&
+          notes.map((note) => (
+            <Grid item key={note.id} xs={12} md={6} lg={4}>
+              <Paper>{note.title}</Paper>
+            </Grid>
+          ))}
+      </Grid>
+    </Container>
+  );
 };
 
 export default Notes;
