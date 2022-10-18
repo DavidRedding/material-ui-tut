@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => {
     page: {
       background: '#f9f9f9',
       width: '100%',
+      minHeight: '95vh',
       padding: theme.spacing(3),
     },
 
@@ -61,7 +62,7 @@ const Layout = ({ children }) => {
 
   const menuItems = [
     { text: 'My Notes', icon: <SubjectOutlined color="secondary" />, path: '/' },
-    { text: 'Create Note', icon: <AddCircleOutlineOutlined color="secondary" />, path: '/create' },
+    { text: 'Jot a Note', icon: <AddCircleOutlineOutlined color="secondary" />, path: '/create' },
   ];
 
   return (

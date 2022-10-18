@@ -8,10 +8,10 @@ const useStyles = makeStyles({
       if (note.category == 'work') {
         return yellow[700];
       }
-      if (note.category == 'money') {
+      if (note.category == 'finance') {
         return green[500];
       }
-      if (note.category == 'todos') {
+      if (note.category == 'to-do') {
         return pink[500];
       }
       return blue[500];
