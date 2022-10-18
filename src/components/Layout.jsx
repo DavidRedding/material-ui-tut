@@ -1,6 +1,19 @@
-import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, makeStyles, Typography } from '@material-ui/core';
-import { SubjectOutlined, InboxOutlined, DraftsOutlined, AddCircleOutlineOutlined } from '@material-ui/icons/';
+import {
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  makeStyles,
+  Typography,
+  AppBar,
+  Toolbar,
+  Avatar,
+} from '@material-ui/core';
+import { SubjectOutlined, AddCircleOutlineOutlined } from '@material-ui/icons/';
 import { useHistory, useLocation } from 'react-router-dom';
+import { format } from 'date-fns';
 
 const drawerWidth = 240;
 
@@ -27,6 +40,16 @@ const useStyles = makeStyles((theme) => {
     title: {
       padding: theme.spacing(2),
     },
+    appBar: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
+    date: {
+      marginRight: `auto`,
+    },
+    avatar: {
+      marginLeft: theme.spacing(2),
+    },
+    toolbar: theme.mixins.toolbar,
   };
 });
 
@@ -44,7 +67,15 @@ const Layout = ({ children }) => {
   return (
     <div className={classes.root}>
       {/* app bar */}
-
+      <AppBar elevation={0} className={classes.appBar}>
+        <Toolbar>
+          <Typography className={classes.date}>
+            Today is the {format(new Date(), 'do')} of {format(new Date(), 'MMMM Y')}
+          </Typography>
+          <Typography>Jemelle</Typography>
+          <Avatar src="/mario-av.png" className={classes.avatar} />
+        </Toolbar>
+      </AppBar>
       {/* side drawer */}
       <Drawer
         open
@@ -76,7 +107,10 @@ const Layout = ({ children }) => {
         <Divider />
       </Drawer>
 
-      <div className={classes.page}>{children}</div>
+      <div className={classes.page}>
+        <div className={classes.toolbar}></div>
+        {children}
+      </div>
     </div>
   );
 };
